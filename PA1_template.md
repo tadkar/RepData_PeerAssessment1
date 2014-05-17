@@ -63,7 +63,10 @@ message("The interval with maximum average steps is ", a)
 
 
 ## Imputing missing values
-The code below calculates and reports the total number of missing values. For the given data set, the inly missing values are in the sets column, but the code does the computation by calculating the number of rows with any missing element, and so should generalise to other cases.
+The code below calculates and reports the total number of missing values. For the given data set, the only missing values are in the sets column, but the code does the computation by calculating the number of rows with any missing element, and so should generalise to other cases. 
+
+The strategy to fill in the missing values is to replace the missing value by the average across all days for that particular time interval. So for example if the steps value for the interval 15 is missing on an particular day, it is replaced by the average of all activity for the 15 interval.
+
 
 ```r
 # Find the rows with any missing values
