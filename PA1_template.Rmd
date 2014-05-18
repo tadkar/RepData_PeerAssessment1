@@ -9,7 +9,7 @@ activity$date<-as.Date(activity$date,"%Y-%m-%d")
 
 
 ## What is mean total number of steps taken per day?
-The approach taken to computing this is to make a table of the total number of steps taken per day and store it in a variable "a". We then compute the mean of a, taking care to ensure that the missing values are removed.
+The approach taken to computing this is to make a table of the total number of steps taken per day and store it in a variable "a". We then compute the mean of "a", taking care to ensure that the missing values are removed.
 
 ```{r}
 a<-tapply(activity$steps,activity$date, FUN=sum)

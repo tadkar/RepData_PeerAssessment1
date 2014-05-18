@@ -181,8 +181,6 @@ hljs.initHighlightingOnLoad();
 <body>
 <h1>Reproducible Research: Peer Assessment 1</h1>
 
-<h1>Reproducible Research: Peer Assessment 1</h1>
-
 <h2>Loading and preprocessing the data</h2>
 
 <pre><code class="r">activity &lt;- read.csv(&quot;~/Reproducible Research/activity.csv&quot;)
@@ -191,7 +189,7 @@ activity$date &lt;- as.Date(activity$date, &quot;%Y-%m-%d&quot;)
 
 <h2>What is mean total number of steps taken per day?</h2>
 
-<p>The approach taken to computing this is to make a table of the total number of steps taken per day and store it in a variable a. When then compute the mean of a, taking care to ensure that the missing values are removed.</p>
+<p>The approach taken to computing this is to make a table of the total number of steps taken per day and store it in a variable &ldquo;a&rdquo;. We then compute the mean of &ldquo;a&rdquo;, taking care to ensure that the missing values are removed.</p>
 
 <pre><code class="r">a &lt;- tapply(activity$steps, activity$date, FUN = sum)
 par(mfrow = c(1, 1))
@@ -210,7 +208,7 @@ message(&quot;The mean is &quot;, m1, &quot; and the median is &quot;, m2)
 
 <h2>What is the average daily activity pattern?</h2>
 
-<p>Here&#39;s a graph of the daily activity pattern. A spike is clearly visible in the morning, and there are other subsidiary peaks later on in the day. The period of very low activityt presumably corresponds to the time the subjects are usually asleep.
+<p>Here&#39;s a graph of the daily activity pattern. A spike is clearly visible in the morning, and there are other subsidiary peaks later on in the day. The period of very low activity presumably corresponds to the time the subjects are usually asleep.
 The code below plots a line graph of the mean number of steps by time. It also identifies and prints out the time interval associated with the greatest activity.</p>
 
 <pre><code class="r">meanStepsByTime &lt;- tapply(activity$steps, activity$interval, mean, na.rm = T)
@@ -232,7 +230,7 @@ message(&quot;The interval with maximum average steps is &quot;, a)
 
 <p>The code below calculates and reports the total number of missing values. For the given data set, the only missing values are in the sets column, but the code does the computation by calculating the number of rows with any missing element, and so should generalise to other cases. </p>
 
-<p>The strategy to fill in the missing values is to replace the missing value by the average across all days for that particular time interval. So for example if the steps value for the interval 15 is missing on an particular day, it is replaced by the average of all activity for the 15 interval.</p>
+<p>The strategy to fill in the missing values is to replace the missing value by the average across all days for that particular time interval. So for example if the steps value for the interval 15 is missing on an particular day, it is replaced by the average of steps taken for the 15 interval on all days.</p>
 
 <pre><code class="r"># Find the rows with any missing values
 m &lt;- apply(activity, 1, function(x) sum(is.na(x)) &gt; 0)
@@ -276,7 +274,8 @@ completeData$dayType &lt;- factor(completeData$dayType, levels = c(&quot;Monday&
 </code></pre>
 
 <pre><code class="r">library(lattice)
-## Use aggregate function to calculate the mean for a particular
+## Use aggregate function to calculate the mean for a particular interval
+## broken down by dayType
 temp1 &lt;- aggregate(steps ~ interval + dayType, completeData, mean)
 xyplot(temp1$steps ~ temp1$interval | temp1$dayType, type = &quot;l&quot;, xlab = &quot;Time Interval&quot;, 
     ylab = &quot;Average number of steps&quot;, main = &quot;Average steps per interval by type of day&quot;)
